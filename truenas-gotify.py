@@ -54,7 +54,7 @@ async def on_message(request):
     else:
         print(f">> Unknown error while forwarding to gotify. Error Code {gotify_resp.status}")
 
-    # Return the gotify status code to truenas
+    # Return the gotify status code to TrueNAS
     return web.Response(status=gotify_resp.status)
 
 # Send an arbitrary alert to gotify

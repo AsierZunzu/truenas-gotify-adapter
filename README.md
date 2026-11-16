@@ -1,6 +1,6 @@
-# TrueNas Gotify Adapter
+# TrueNAS Gotify Adapter
 
-TrueNas does not natively provide a way to send alerts and notifications to a Gotify server. This repo 'abuses' the TrueNas Slack alert integration and provides a fake slack webhook endpoint to forward alerts to a Gotify server.
+TrueNAS does not natively provide a way to send alerts and notifications to a Gotify server. This repo 'abuses' the TrueNAS Slack alert integration and provides a fake slack webhook endpoint to forward alerts to a Gotify server.
 Note that Slack is not required at all for this integration to work.
 
 ## Installation
