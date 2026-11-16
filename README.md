@@ -1,40 +1,62 @@
 # TrueNAS Gotify Adapter
 
-TrueNAS does not natively provide a way to send alerts and notifications to a Gotify server. This repo 'abuses' the TrueNAS Slack alert integration and provides a fake slack webhook endpoint to forward alerts to a Gotify server.
-Note that Slack is not required at all for this integration to work.
+TrueNAS does not natively provide a way to send alerts and notifications to a [Gotify](https://gotify.net/) server. This project "abuses" the TrueNAS **Slack** alert integration by exposing a fake Slack webhook endpoint that forwards alerts to your Gotify server.
+
+> [!NOTE]
+> Slack is **not** required at all for this integration to work.
+
+## Configuration
+
+The container is configured through the following environment variables:
+
+| Variable       | Description                | Example                       |
+| -------------- | -------------------------- | ----------------------------- |
+| `GOTIFY_URL`   | URL of your Gotify server  | `https://gotify.example.com/` |
+| `GOTIFY_TOKEN` | Gotify application token   | `cGVla2Fib29v`                |
+
+The adapter listens on port `31662`.
 
 ## Installation
-1. Apps -> Discover Apps -> Custom App
-    - Enter an Application Name, e.g. "truenas-gotify"
-    - _Image Repository_: ghcr.io/asierzunzu/truenas-gotify-adapter
-    - _Image Tag_: main
-    - Environment Variables:
-        - _Name_: GOTIFY\_URL
-        - _Value_: [your gotify url] e.g.https://gotify.example.com/
-        - _Name_: GOTIFY\_TOKEN
-        - _Value_: [your gotify app token] e.g. cGVla2Fib29v
 
-    - Network Configuration: 
-        - Check _"Host Network"_
-    - Save
+### Step 1: Deploy the adapter
 
-OR
+Choose **one** of the following options.
 
-1. Apps -> Discover Apps -> Custom App -> Install via YAML
-```yaml
-services:
-  gotify-truenas-adapter:
-    container_name: gotify-truenas-adapter
-    image: ghcr.io/asierzunzu/truenas-gotify-adapter:main
-    restart: unless-stopped
-    environment:
-      - GOTIFY_URL=<your gotify url> # e.g. https://gotify.example.com/
-      - GOTIFY_TOKEN=<your gotify app token> # e.g. cGVla2Fib29v
-    network_mode: host
-```
+#### Option A: Custom App (UI)
 
-1. System -> Alert Settings -> Add
-    - _Type_: Slack
-    - _Webhook URL_: http://localhost:31662
-    - Click _Send Test Alert_ to test the connection
-    - Save
+1. Go to **Apps → Discover Apps → Custom App**.
+2. Fill in the form:
+   - **Application Name**: e.g. `truenas-gotify`
+   - **Image Repository**: `ghcr.io/asierzunzu/truenas-gotify-adapter`
+   - **Image Tag**: `main`
+   - **Environment Variables**: add `GOTIFY_URL` and `GOTIFY_TOKEN` (see [Configuration](#configuration)).
+   - **Network Configuration**: check **Host Network**.
+3. Click **Save**.
+
+#### Option B: Install via YAML
+
+1. Go to **Apps → Discover Apps → Custom App → Install via YAML**.
+2. Paste the following, replacing the placeholder values:
+
+   ```yaml
+   services:
+     gotify-truenas-adapter:
+       container_name: gotify-truenas-adapter
+       image: ghcr.io/asierzunzu/truenas-gotify-adapter:main
+       restart: unless-stopped
+       environment:
+         - GOTIFY_URL=<your gotify url> # e.g. https://gotify.example.com/
+         - GOTIFY_TOKEN=<your gotify app token> # e.g. cGVla2Fib29v
+       network_mode: host
+   ```
+
+3. Click **Save**.
+
+### Step 2: Configure the TrueNAS alert service
+
+1. Go to **System → Alert Settings → Add**.
+2. Fill in the form:
+   - **Type**: `Slack`
+   - **Webhook URL**: `http://localhost:31662`
+3. Click **Send Test Alert** to verify the connection.
+4. Click **Save**.
