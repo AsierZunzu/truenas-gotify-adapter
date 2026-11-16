@@ -1,8 +1,9 @@
-FROM alpine:latest
-
-RUN apk add --update --no-cache python3 py3-aiohttp
+FROM python:3.15.2-alpine3.24
 
 WORKDIR /app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY truenas-gotify.py ./
 
-CMD ["/usr/bin/env", "python3", "-u", "truenas-gotify.py"]
+CMD ["python", "-u", "truenas-gotify.py"]
