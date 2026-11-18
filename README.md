@@ -20,7 +20,7 @@ The adapter listens on port `31662`.
 
 ## Development
 
-Requires Node.js 24 or later. The TypeScript sources run directly on Node, no build step needed.
+Requires Node.js 26 or later. The TypeScript sources run directly on Node, no build step needed.
 
 ```sh
 npm install        # type definitions and the TypeScript compiler
