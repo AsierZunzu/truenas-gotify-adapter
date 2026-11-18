@@ -1,3 +1,4 @@
+import pkg from "../package.json" with { type: "json" };
 import { createAdapter, normalizeGotifyUrl } from "./adapter.ts";
 
 // The ip address the service should listen on
@@ -34,7 +35,9 @@ if (!VERIFY_CERT) {
 }
 
 const server = createAdapter({ gotifyUrl: normalizeGotifyUrl(gotifyUrl), gotifyToken });
-server.listen(PORT, LISTEN_HOST, () => console.log(`Listening on http://${LISTEN_HOST}:${PORT}`));
+server.listen(PORT, LISTEN_HOST, () =>
+  console.log(`${pkg.name} v${pkg.version} listening on http://${LISTEN_HOST}:${PORT}`),
+);
 
 // Exit promptly on `docker stop`
 for (const signal of ["SIGINT", "SIGTERM"] as const) {
