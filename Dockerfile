@@ -1,9 +1,8 @@
-FROM python:3.15.2-alpine3.24
+FROM node:24.22.3-alpine3.24
 
 WORKDIR /app
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY package.json ./
+COPY src/adapter.ts src/main.ts ./src/
 
-COPY truenas-gotify.py ./
-
-CMD ["python", "-u", "truenas-gotify.py"]
+USER node
+CMD ["node", "src/main.ts"]

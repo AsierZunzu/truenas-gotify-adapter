@@ -13,8 +13,21 @@ The container is configured through the following environment variables:
 | -------------- | -------------------------- | ----------------------------- |
 | `GOTIFY_URL`   | URL of your Gotify server  | `https://gotify.example.com/` |
 | `GOTIFY_TOKEN` | Gotify application token   | `cGVla2Fib29v`                |
+| `LISTEN_HOST`  | Address to listen on (optional, defaults to `127.0.0.1`) | `0.0.0.0` |
+| `VERIFY_CERT`  | Set to `false` to accept self-signed Gotify certificates (optional, insecure) | `false` |
 
 The adapter listens on port `31662`.
+
+## Development
+
+Requires Node.js 24 or later. The TypeScript sources run directly on Node, no build step needed.
+
+```sh
+npm install        # type definitions and the TypeScript compiler
+npm run typecheck
+npm test
+GOTIFY_URL=https://gotify.example.com/ GOTIFY_TOKEN=cGVla2Fib29v npm start
+```
 
 ## Installation
 
