@@ -3,6 +3,7 @@ name: Create and publish a Docker image
 on:
   push:
     branches: ['main']
+  pull_request:
   workflow_dispatch:
 
 env:
@@ -36,6 +37,8 @@ jobs:
 
   build-and-push-image:
     needs: check
+    # Pull requests only run the checks, images are published from main
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
