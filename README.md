@@ -30,7 +30,7 @@ Choose **one** of the following options.
 2. Fill in the form:
    - **Application Name**: e.g. `truenas-gotify`
    - **Image Repository**: `ghcr.io/asierzunzu/truenas-gotify-adapter`
-   - **Image Tag**: `1` (see [Versions](#versions))
+   - **Image Tag**: `2` (see [Versions](#versions))
    - **Environment Variables**: add `GOTIFY_URL` and `GOTIFY_TOKEN` (see [Configuration](#configuration)).
    - **Network Configuration**: check **Host Network**.
 3. Click **Save**.
@@ -44,7 +44,7 @@ Choose **one** of the following options.
    services:
      gotify-truenas-adapter:
        container_name: gotify-truenas-adapter
-       image: ghcr.io/asierzunzu/truenas-gotify-adapter:1
+       image: ghcr.io/asierzunzu/truenas-gotify-adapter:2
        restart: unless-stopped
        environment:
          - GOTIFY_URL=<your gotify url> # e.g. https://gotify.example.com/
@@ -69,9 +69,9 @@ Releases follow [semantic versioning](https://semver.org/) and are listed on the
 
 | Tag      | Updates to                                         |
 | -------- | -------------------------------------------------- |
-| `1`      | the latest `1.x.y` release (recommended)           |
-| `1.0`    | the latest `1.0.y` release                         |
-| `1.0.0`  | nothing, pinned to that exact release              |
+| `2`      | the latest `2.x.y` release (recommended)           |
+| `2.0`    | the latest `2.0.y` release                         |
+| `2.0.0`  | nothing, pinned to that exact release              |
 | `latest` | the latest release, including breaking changes     |
 | `main`   | the latest commit, unreleased                      |
 
